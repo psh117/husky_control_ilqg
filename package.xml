@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>husky_control_ilqg</name>
+  <version>0.0.0</version>
+  <description>The husky_control_ilqg package</description>
+
+  <maintainer email="psh117@snu.ac.kr">Suhan Park</maintainer>
+
+  <license>GPLv2</license>
+
+  <author email="psh117@snu.ac.kr">Suhan Park</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+
+  <export>
+  </export>
+</package>
