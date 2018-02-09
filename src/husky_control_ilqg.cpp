@@ -112,11 +112,11 @@ int main(int argc, char **argv)
   auto &plan = dm.getPlannedStateMatrix();
 
   Eigen::MatrixXd plan_ori;
-  ROS_INFO("planned size = %d %d", plan.rows(), plan.cols());
+  //ROS_INFO("planned size = %d %d", plan.rows(), plan.cols());
   plan_ori.resize(plan.rows(), plan.cols());
-  ROS_INFO("resized");
+  //ROS_INFO("resized");
   plan_ori = plan;
-  ROS_INFO("copied");
+  //ROS_INFO("copied");
 
   ros::Rate r(1 / CONTROL_FREQ);
   size_t time_tick = 0;
@@ -136,25 +136,25 @@ int main(int argc, char **argv)
   geometry_msgs::Twist msg;
   while (ros::ok())
   {
-ROS_INFO("start");
+//ROS_INFO("start");
     double vl = plan(3,time_tick);
     double vr = plan(4,time_tick);
     double v = (vr+vl)/2.;
     double w = (vr-vl)/0.545;
 
-ROS_INFO("start2");
+//ROS_INFO("start2");
     msg.linear.x = v;
     msg.angular.z = w;
     vel_cmd_pub.publish(msg);
 
 
-ROS_INFO("start3");
+//ROS_INFO("start3");
     xt(0) = robot_state(0);
     xt(1) = robot_state(1);
     xt(2) = robot_state(2);
     xt(3) = vl;
     xt(4) = vr;
-ROS_INFO("replan");
+//ROS_INFO("replan");
     dm.replan(time_tick,xt);
 
       //std::cout << "Diffs" << std::e  ndl;

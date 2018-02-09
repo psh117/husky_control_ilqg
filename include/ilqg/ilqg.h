@@ -496,7 +496,7 @@ void iLQG<data_type, x_dim, u_dim>::backwardPass(const double lambda,
   Vx = cx_[N_ -1];
   Vxx = cxx_[N_ -1];
 
-  for (long i = N_ -2; i>=tick; i--)
+  for (long i = N_ -2; i>=(int)tick; i--)
   {
     Qx = cx_[i] + fx_[i].transpose() * Vx;
     Qu = cu_[i] + fu_[i].transpose() * Vx;
@@ -815,7 +815,6 @@ inline double iLQG<data_type, x_dim, u_dim>::absMaxVector(const VectorU &x, cons
 template<typename data_type, size_t x_dim, size_t u_dim>
 void iLQG<data_type, x_dim, u_dim>::replan(size_t tick, const VectorX &state)
 {
-cout << "start to plan" << endl;
   x_.col(tick) = state;
 
   bool is_dynamics_changed_after_tick = true;
@@ -837,7 +836,6 @@ cout << "start to plan" << endl;
 
   // line no. 141 (matlab)
   diverge_ = true;
-cout << "start to plan2" << endl;
   for (size_t i=0; i<k_; i++)
   {
     x_new_[i].col(tick) = state;
@@ -913,7 +911,6 @@ cout << "start to backwardpass" << endl;
       break;
     }
 
-cout << "start to forwardpass" << endl;
     // ====== STEP 3: line-search to find new control sequence, trajectory, cost
     is_forwardpass_done = false;
     if (is_backpass_done)
@@ -923,7 +920,6 @@ cout << "start to forwardpass" << endl;
       {
         forwardPass(params_.alpha(al_i),x_new_[al_i], u_new_[al_i], c_new_[al_i], tick);
       }
-	cout << "D_cost_" << endl;
       for (int i = 0; i < k_; i++)
         D_cost_(i) = (c_.tail(N_-tick-1)).sum() - (c_new_[i].tail(N_-tick-1)).sum();
 
