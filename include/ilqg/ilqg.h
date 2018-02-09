@@ -870,7 +870,6 @@ void iLQG<data_type, x_dim, u_dim>::replan(size_t tick, const VectorX &state)
       }
     }
 
-cout << "start to backwardpass" << endl;
     // ====== STEP 2: backward pass, compute optimal control law and cost-to-go
     // Eq. (4) ~ (6)
     is_backpass_done = false;

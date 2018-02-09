@@ -136,11 +136,14 @@ int main(int argc, char **argv)
   geometry_msgs::Twist msg;
   while (ros::ok())
   {
+
 //ROS_INFO("start");
+//		double gain_w = 1.2;
+		double gain_w = 1.2;
     double vl = plan(3,time_tick);
     double vr = plan(4,time_tick);
     double v = (vr+vl)/2.;
-    double w = (vr-vl)/0.545;
+    double w = (vr-vl)/0.545 ;
 
 //ROS_INFO("start2");
     msg.linear.x = v;
@@ -161,7 +164,6 @@ int main(int argc, char **argv)
       //std::cout << xt << std::endl;
       //std::cout << plan.col(time_tick) << std::endl;
       //std::cout << xt-plan.col(time_tick) << std::endl;
-ROS_INFO("gg");
     file_log << xt(0) << '\t' << xt(1) << '\t' << xt(2) << '\t'<< xt(3) << '\t' << xt(4) << '\t'
              << plan_ori.col(time_tick)(0) << '\t'
              << plan_ori.col(time_tick)(1) << '\t'
